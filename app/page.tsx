@@ -1,21 +1,16 @@
-'use client'
-import {useStores} from "@/app/hook";
-import {observer} from 'mobx-react-lite';
 import React from "react";
-import {useSearchParams} from "next/navigation";
+import Index from "@/app/component/home";
 
-const Home:React.FC=  ()=>{
-    var params = useSearchParams();
-    const {count,increment,user,changeName}=useStores()
+interface HomePageProps {
+    searchParams:{
+        id?: number
+        username?: string
+    }
+}
+const Home:React.FC<HomePageProps>=  ({searchParams})=>{
+
     return (
-        <main className="flex min-h-screen flex-col items-center justify-between p-24">
-            <div>{count}</div>
-            <div>{user.username}</div>
-            <button onClick={increment}>increment</button>
-            <button onClick={()=>{
-                changeName("张军mobx")
-            }}>该名</button>
-        </main>
+        <Index params={searchParams}/>
     )
 }
-export default observer(Home);
+export default Home;
